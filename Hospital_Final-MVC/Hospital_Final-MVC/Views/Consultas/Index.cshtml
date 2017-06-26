@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BaseModels.Consulta>
+
+@{
+    ViewBag.Title = "Consultas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>@Html.ActionLink("Criar Novo", "Create")</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model._Paciente.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model._Medico.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model._TipoConsulta.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model._TipoConsulta.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataConsulta)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item._Paciente.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._Medico.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._TipoConsulta.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._TipoConsulta.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataConsulta)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ConsultaID }) |
+                @*@Html.ActionLink("Detalhes", "Details", new { id = item.ConsultaID }) |*@
+                @Html.ActionLink("Excluir", "Delete", new { id = item.ConsultaID })
+            </td>
+        </tr>
+    }
+</table>
+
