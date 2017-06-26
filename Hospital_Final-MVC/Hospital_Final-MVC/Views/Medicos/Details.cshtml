@@ -1,10 +1,10 @@
 ﻿@model BaseModels.Medico
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes Medico";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag</h2>
 
 <div>
     <h4>Medico</h4>
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MedicoID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.MedicoID }) |
+    @Html.ActionLink("Voltar a Lista", "Index")
 </p>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BaseModels.TipoConsulta>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tipo Consulta";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.Valor)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TipoConsultaID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TipoConsultaID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TipoConsultaID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.TipoConsultaID }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.TipoConsultaID }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.TipoConsultaID })
         </td>
     </tr>
 }

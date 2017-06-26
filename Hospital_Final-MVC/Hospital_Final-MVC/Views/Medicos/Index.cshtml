@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BaseModels.Medico>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Medico";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,9 @@
             @Html.DisplayFor(modelItem => item.DataNasc)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MedicoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MedicoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MedicoID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.MedicoID }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.MedicoID }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.MedicoID })
         </td>
     </tr>
 }
