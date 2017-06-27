@@ -51,9 +51,27 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Medicos.Add(medico);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if((db.Medicos.FirstOrDefault(x => x.Nome == medico.Nome))== null)
+                    {
+                        db.Medicos.Add(medico);
+                        db.SaveChanges();
+                        TempData["Mensagem"] = "Medico Criado com Sucesso!";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Mensagem"] = "Medico já existente!";
+                        return View(medico);
+                    }
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Houve um Erro!";
+                    return View(medico);
+                }
+                
             }
 
             return View(medico);
