@@ -4,7 +4,7 @@
     ViewBag.Title = "Criar Consulta";
 }
 
-<h2>@ViewBag</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,6 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        @if (TempData["Mensagem"] != null)
+        {
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong></strong>@TempData["Mensagem"]
+            </div>
+        }
         <h4>Consulta</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

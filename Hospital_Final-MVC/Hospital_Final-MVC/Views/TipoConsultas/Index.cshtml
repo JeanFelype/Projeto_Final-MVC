@@ -4,8 +4,14 @@
     ViewBag.Title = "Tipo Consulta";
 }
 
-<h2>@ViewBag</h2>
-
+<h2>@ViewBag.Title</h2>
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong></strong>@TempData["Mensagem"]
+    </div>
+}
 <p>
     @Html.ActionLink("Criar Novo", "Create")
 </p>

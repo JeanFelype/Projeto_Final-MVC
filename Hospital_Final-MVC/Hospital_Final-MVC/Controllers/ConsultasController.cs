@@ -31,9 +31,25 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Consultas.Add(consulta);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if ((db.Consultas.FirstOrDefault(x => x._Medico == consulta._Medico && x._Paciente == consulta._Paciente && x._TipoConsulta == consulta._TipoConsulta && x.DataConsulta == consulta.DataConsulta)) == null)
+                    {
+                        db.Consultas.Add(consulta);
+                        db.SaveChanges();
+                        TempData["Mensagem"] = "Consulta Cadastrada com Sucesso!";
+                        return RedirectToAction("Index");
+                    }else
+                    {
+                        TempData["Mensagem"] = "Consulta já Cadastrada!";
+                        return View(consulta);
+                    }
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Cadastrar Consulta!";
+                    return View(consulta);
+                } 
             }
 
             return View(consulta);
@@ -60,9 +76,18 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(consulta).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(consulta).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["Mensagem"] = "Consulta Editada com Sucesso!";
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Cadastrar Consulta!";
+                    return View(consulta);
+                }
             }
             return View(consulta);
         }
@@ -85,10 +110,19 @@ namespace Hospital_Final_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Consulta consulta = db.Consultas.Find(id);
-            db.Consultas.Remove(consulta);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Consulta consulta = db.Consultas.Find(id);
+                db.Consultas.Remove(consulta);
+                db.SaveChanges();
+                TempData["Mensagem"] = "Consulta Excluida com Sucesso!";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["Mensagem"] = "Erro ao Cadastrar Consulta!";
+                return View();
+            }
         }
     }
 }

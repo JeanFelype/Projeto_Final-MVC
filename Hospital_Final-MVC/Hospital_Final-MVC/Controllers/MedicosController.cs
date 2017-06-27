@@ -53,7 +53,7 @@ namespace Hospital_Final_MVC.Controllers
             {
                 try
                 {
-                    if((db.Medicos.FirstOrDefault(x => x.Nome == medico.Nome))== null)
+                    if((db.Medicos.FirstOrDefault(x => x.CRM == medico.CRM))== null)
                     {
                         db.Medicos.Add(medico);
                         db.SaveChanges();
@@ -101,9 +101,19 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(medico).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(medico).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["Mensagem"] = "Medico Editado com Sucesso!";
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Editar Medico!";
+                    return View(medico);
+                }
+                
             }
             return View(medico);
         }
@@ -128,10 +138,19 @@ namespace Hospital_Final_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Medico medico = db.Medicos.Find(id);
-            db.Medicos.Remove(medico);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Medico medico = db.Medicos.Find(id);
+                db.Medicos.Remove(medico);
+                db.SaveChanges();
+                TempData["Mensagem"] = "Medico Excluido com Sucesso!";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["Mensagem"] = "Erro ao Excluir Medico!";
+                return View();
+            }   
         }
 
         protected override void Dispose(bool disposing)

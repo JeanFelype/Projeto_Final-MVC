@@ -51,9 +51,24 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Pacientes.Add(paciente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if ((db.Pacientes.FirstOrDefault(x => x.CPF == paciente.CPF)) == null) { 
+                    db.Pacientes.Add(paciente);
+                    db.SaveChanges();
+                    TempData["Mensagem"] = "Paciente Cadastrado com Sucesso!";
+                    return RedirectToAction("Index");
+                }else{
+                        TempData["Mensagem"] = "Paciente já Cadastrado!";
+                        return View(paciente);
+                }
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Cadastrar Paciente!";
+                    return View(paciente);
+
+                }
             }
 
             return View(paciente);
@@ -83,9 +98,18 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(paciente).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(paciente).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["Mensagem"] = "Paciente Editado com Sucesso!";
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Editar Paciente!";
+                    return View();
+                }
             }
             return View(paciente);
         }
@@ -110,10 +134,19 @@ namespace Hospital_Final_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Paciente paciente = db.Pacientes.Find(id);
-            db.Pacientes.Remove(paciente);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Paciente paciente = db.Pacientes.Find(id);
+                db.Pacientes.Remove(paciente);
+                db.SaveChanges();
+                TempData["Mensagem"] = "Paciente Excluido com Sucesso!";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["Mensagem"] = "Erro ao Excluir Paciente!";
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)

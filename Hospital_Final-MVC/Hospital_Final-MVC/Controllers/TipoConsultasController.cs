@@ -51,9 +51,26 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TipoConsultas.Add(tipoConsulta);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    if ((db.TipoConsultas.FirstOrDefault(x => x.Nome == tipoConsulta.Nome)) == null) { 
+                    db.TipoConsultas.Add(tipoConsulta);
+                    db.SaveChanges();
+                    TempData["Mensagem"] = "Tipo Consulta Criado com Sucesso!";
+                    return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Mensagem"] = "Tipo Consulta já existente!";
+                        return View(tipoConsulta);
+                    }
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Cadastrar Tipo Consulta!";
+                    return View(tipoConsulta);
+                }
+                
             }
 
             return View(tipoConsulta);
@@ -83,9 +100,18 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tipoConsulta).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(tipoConsulta).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["Mensagem"] = "Tipo Consulta Editado com Sucesso!";
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    TempData["Mensagem"] = "Erro ao Editar Tipo Consulta!";
+                    return View(tipoConsulta);
+                }
             }
             return View(tipoConsulta);
         }
@@ -110,10 +136,19 @@ namespace Hospital_Final_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TipoConsulta tipoConsulta = db.TipoConsultas.Find(id);
-            db.TipoConsultas.Remove(tipoConsulta);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                TipoConsulta tipoConsulta = db.TipoConsultas.Find(id);
+                db.TipoConsultas.Remove(tipoConsulta);
+                db.SaveChanges();
+                TempData["Mensagem"] = "Tipo Consulta Excluido com Sucesso!";
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["Mensagem"] = "Erro ao Excluir Tipo Consulta!";
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)
