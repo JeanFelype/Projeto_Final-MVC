@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Hospital_Final_MVC.Models;
+using System.Web.Security;
 
 namespace Hospital_Final_MVC
 {
@@ -63,6 +64,8 @@ namespace Hospital_Final_MVC
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            Roles.CreateRole("Admin");
+
         }
     }
 }

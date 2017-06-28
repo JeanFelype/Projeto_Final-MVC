@@ -18,6 +18,11 @@ namespace Hospital_Final_MVC.Controllers
         // GET: TipoConsultas
         public ActionResult Index()
         {
+
+            if (User.IsInRole("admin"))
+                           {
+                
+                           }
             return View(db.TipoConsultas.ToList());
         }
 

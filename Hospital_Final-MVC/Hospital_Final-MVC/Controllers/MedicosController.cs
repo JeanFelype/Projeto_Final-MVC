@@ -18,6 +18,11 @@ namespace Hospital_Final_MVC.Controllers
         // GET: Medicos
         public ActionResult Index()
         {
+
+            if (User.IsInRole("admin"))
+                           {
+
+                           }
             return View(db.Medicos.ToList());
         }
 

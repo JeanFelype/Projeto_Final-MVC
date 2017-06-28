@@ -10,7 +10,12 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
+    @if (User.IsInRole("admin"))
+    {
+        // so o admin ve
+    }
+
     <div class="form-horizontal">
         @if (TempData["Mensagem"] != null)
         {
