@@ -64,6 +64,8 @@ namespace Hospital_Final_MVC.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "User Roles")]
+        public string  UserRoles { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
