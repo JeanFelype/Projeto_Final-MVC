@@ -19,10 +19,10 @@ namespace Hospital_Final_MVC.Controllers
         public ActionResult Index()
         {
 
-            if (User.IsInRole("admin"))
-                           {
+            //if (User.IsInRole("admin"))
+                        //   {
                 
-                           }
+                         //  }
             return View(db.TipoConsultas.ToList());
         }
 

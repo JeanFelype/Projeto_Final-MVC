@@ -64,7 +64,7 @@ namespace Hospital_Final_MVC
             //    ClientId = "",
             //    ClientSecret = ""
             //});
-            Roles.CreateRole("Admin");
+            //Roles.CreateRole("Admin");
 
         }
     }

@@ -16,22 +16,22 @@ namespace Hospital_Final_MVC.Controllers
         // GET: Consultas
         public ActionResult Index()
         {
-            if (User.IsInRole("admin"))
-                         {
-
-                         }
+            var consultas = db.Consultas.Include(c => c._Medico).Include(c => c._Paciente).Include(c => c._TipoConsulta);
             return View(db.Consultas.ToList());
         }
 
         //Criar
         public ActionResult Create()
         {
+            ViewBag.MedicoID = new SelectList(db.Medicos, "MedicoID", "Nome");
+            ViewBag.PacienteID = new SelectList(db.Pacientes, "PacienteID", "Nome");
+            ViewBag.TipoConsultaID = new SelectList(db.TipoConsultas, "TipoConsultaID", "Nome");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ConsultaID,paciente(Nome),medico(Nome),tipoConsulta(Nome),tipoConsulta(Valor),DataConsulta")] Consulta consulta)
+        public ActionResult Create([Bind(Include = "ConsultaID,PacienteID,MedicoID,TipoConsultaID,DataConsulta")] Consulta consulta)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +55,9 @@ namespace Hospital_Final_MVC.Controllers
                     return View(consulta);
                 } 
             }
-
+            ViewBag.MedicoID = new SelectList(db.Medicos, "MedicoID", "Nome");
+            ViewBag.PacienteID = new SelectList(db.Pacientes, "PacienteID", "Nome");
+            ViewBag.TipoConsultaID = new SelectList(db.TipoConsultas, "TipoConsultaID", "Nome");
             return View(consulta);
         }
 
@@ -71,12 +73,15 @@ namespace Hospital_Final_MVC.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MedicoID = new SelectList(db.Medicos, "MedicoID", "Nome");
+            ViewBag.PacienteID = new SelectList(db.Pacientes, "PacienteID", "Nome");
+            ViewBag.TipoConsultaID = new SelectList(db.TipoConsultas, "TipoConsultaID", "Nome");
             return View(consulta);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ConsultaID,paciente(Nome),medico(Nome),tipoConsulta(Nome),tipoConsulta(Valor),DataConsulta")] Consulta consulta)
+        public ActionResult Edit([Bind(Include = "ConsultaID,PacienteID,MedicoID,TipoConsultaID,DataConsulta")] Consulta consulta)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +98,9 @@ namespace Hospital_Final_MVC.Controllers
                     return View(consulta);
                 }
             }
+            ViewBag.MedicoID = new SelectList(db.Medicos, "MedicoID", "Nome");
+            ViewBag.PacienteID = new SelectList(db.Pacientes, "PacienteID", "Nome");
+            ViewBag.TipoConsultaID = new SelectList(db.TipoConsultas, "TipoConsultaID", "Nome");
             return View(consulta);
         }
 
