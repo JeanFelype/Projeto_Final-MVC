@@ -154,7 +154,7 @@ namespace Hospital_Final_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Email = model.Email };
+                var user = new ApplicationUser { Email = model.Email, UserName = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

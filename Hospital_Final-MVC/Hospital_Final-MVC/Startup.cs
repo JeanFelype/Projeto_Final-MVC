@@ -34,10 +34,8 @@ namespace Hospital_Final_MVC
                 //Here we create a Admin super user who will maintain the website                  
 
                 var user = new ApplicationUser();
-                user.UserName = "shanu";
-                user.Email = "syedshanumcain@gmail.com";
-
-                string userPWD = "A@Z200711";
+                user.Email = "admin@gmail.com";
+                string userPWD = "admin1";
 
                 var chkUser = UserManager.Create(user, userPWD);
 
