@@ -27,7 +27,7 @@ namespace Hospital_Final_MVC
             {
 
                 // first we create Admin rool   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                var role = new IdentityRole();
                 role.Name = "Admin";
                 roleManager.Create(role);
 
@@ -52,7 +52,7 @@ namespace Hospital_Final_MVC
             // creating Creating Manager role    
             if (!roleManager.RoleExists("Manager"))
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                var role = new IdentityRole();
                 role.Name = "Manager";
                 roleManager.Create(role);
 
@@ -61,7 +61,7 @@ namespace Hospital_Final_MVC
             // creating Creating Employee role    
             if (!roleManager.RoleExists("Employee"))
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                var role = new IdentityRole();
                 role.Name = "Employee";
                 roleManager.Create(role);
 
